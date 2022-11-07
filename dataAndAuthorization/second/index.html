@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Demo</title>
+    <script src="./app.js" defer></script>
+    <style>
+        article {
+            background-color: #F25F5C;
+            margin: 32px;
+            padding: 10px;
+            border-style: solid;
+            border-color: #50514F;
+        }
+        .main-div {
+            border-style: solid;
+            /* border: 1px; */
+            border-color: #339989;
+            background-color: #8E7DBE;
+        }
+        .comments {
+            border-style: solid;
+            border-color: black;
+        }
+        body {
+            background-color: #EFEFEF;
+        }
+    </style>
+</head>
+<body>
+    <h1>CRUD demo with html</h1>
+
+    <div class="main-div">
+        <label>Name: <input name="name" type="text"></label>
+        <div>
+            <label>Comment: <textarea name="content"></textarea></label>
+        </div>
+        <button id="send">Send your comment!</button>
+    </div>
+
+    <button id="load-the-comments">Load all comments</button>
+
+    <div id="comments">
+
+    </div>
+
+</body>
+</html>
