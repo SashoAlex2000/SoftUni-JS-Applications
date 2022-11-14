@@ -30,12 +30,16 @@ function displayRecipeDetails(recipe) {
 
     recipeName.textContent = recipe.name;
 
+    const ingradienFragment = document.createDocumentFragment();
+    const stepsFragment = document.createDocumentFragment();
+
+
     for (let ingredient of recipe.ingredients) {
 
         const newLiItem = document.createElement('li');
         newLiItem.textContent = ingredient;
 
-        ingredientList.appendChild(newLiItem);
+        ingradienFragment.appendChild(newLiItem);
 
     }
 
@@ -44,10 +48,12 @@ function displayRecipeDetails(recipe) {
         const newLiItem = document.createElement('li');
         newLiItem.textContent = step;
 
-        stepsList.appendChild(newLiItem);
+        stepsFragment.appendChild(newLiItem);
 
     }
 
+    ingredientList.replaceChildren(ingradienFragment);
+    stepsList.replaceChildren(stepsFragment);
 
 }
 

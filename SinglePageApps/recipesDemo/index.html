@@ -15,6 +15,41 @@
             display: block;
         }
 
+        .user,.guest {
+            display: none;
+        }
+
+        #catalog-view {
+            background-color: #F25757;
+            border-style: solid;
+            border-width: 2px;
+            border-color: black; 
+        }
+        li {
+            border-style: solid;
+            border-color: #FF9914;
+            margin: 6px;
+            background-color: #A4A8D1;
+        }
+
+        a {
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        body {
+            background-color: aquamarine;
+        }
+
+        h1 {
+            background-color: rgb(22, 112, 82);
+            margin-top: 0;
+            margin-left: 0;
+            margin-block-start: 0;
+            display:inline-block;
+            padding: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -25,8 +60,10 @@
 
     <nav>
         <a href="javasript:void(0)" id="catalog-link">Catalog</a>
-        <a href="javasript:void(0)" id="login-link">Log In</a>
-        <a href="javasript:void(0)">Register</a>
+        <a href="javasript:void(0)" id="login-link" class="guest">Log In</a>
+        <a href="javasript:void(0)" id="register-link" class="guest">Register</a>
+        <span class="user" id="welcome-mesg"></span>
+        <a href="javasript:void(0)" id="logout-link" class="user">Logout</a>
     </nav>
     
 

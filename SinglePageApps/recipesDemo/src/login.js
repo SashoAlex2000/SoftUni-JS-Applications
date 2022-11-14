@@ -1,3 +1,4 @@
+import { checkUserNav } from "./auth.js";
 import { showCatalogView } from "./catalog.js";
 
 
@@ -24,6 +25,7 @@ async function onLogin(event) {
 
     try {
         await login(email, password);
+        checkUserNav();
         showCatalogView();
     } catch (error) {
         alert(error.message);
