@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA cookbook demo</title>
+    <script src="./src/app.js" type="module"></script>
+    <style>
+        section{
+            display: none;
+        }
+
+        label {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>
+        DEMO - SPA - Recipes
+    </h1>
+
+    <nav>
+        <a href="javasript:void(0)" id="catalog-link">Catalog</a>
+        <a href="javasript:void(0)" id="login-link">Log In</a>
+        <a href="javasript:void(0)">Register</a>
+    </nav>
+    
+
+    <section id="catalog-view">
+        <h2>All recipes</h2>
+
+        <ul id="recipe-list">
+            <li>First recipe</li>
+            <li>Second recipe</li>
+        </ul>
+
+    </section>
+
+    <section id="details-view">
+        <h2>Recipe Details</h2>
+
+        <h3 id="recipe-name"></h3>
+
+        <p>Ingredients</p>
+        <ul id="ingredients-list"></ul>
+        <p>Preparation steps</p>
+        <ul id="preparation-steps-list"></ul>
+
+    </section>
+
+    <section id="login-view">
+
+        <h2>Log In </h2>
+
+        <form id="login-form">
+
+            <label>Email: <input type="text" name="email"></label>
+            <label>Password: <input type="password" name="password"></label>
+
+            <button>Login</button>
+
+        </form>
+
+    </section>
+
+</body>
+</html>
+
