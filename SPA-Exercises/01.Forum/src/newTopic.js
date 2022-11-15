@@ -1,3 +1,4 @@
+import { displayTopics } from "./home.js";
 
 document.getElementsByTagName('form')[0].addEventListener('submit', createTopic)
 
@@ -18,7 +19,7 @@ export async function createTopic (event) {
     document.getElementById('username').value = '';
     document.getElementById('topicName').value = '';
 
-
+    displayTopics();
 }
 
 export async function sendNewTopic (title, username, topic) {

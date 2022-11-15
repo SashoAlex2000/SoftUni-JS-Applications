@@ -1,10 +1,19 @@
+import { displayPostByID } from "./detailsView.js";
 
+document.getElementsByClassName('topic-container')[0].addEventListener('click', displayPostByID)
 
+// function for displaying the topics on the page
 export async function displayTopics() {
 
+    // first we emprty the main container
+    const topicDiv = document.getElementsByClassName('topic-container')[0];
+    topicDiv.innerHTML = '';
+
+    // we get the topics from the DB
     const topics = await getTopics();
     console.log(topics)
 
+    // we display on the DOM each of the topics
     for (let topic of Object.entries(topics)) {
         displayTopicOnDOM(topic[1]);
         console.log(topic)
@@ -33,7 +42,7 @@ function displayTopicOnDOM(topic) {
 
     newDivMETA.innerHTML = `
         <div class="topic-name">
-                <a href="javascript:void(0)" class="normal">
+                <a href="javascript:void(0)" class="normal" id="${topic._id}">
                     <h2>${topic.title}</h2>
                 </a>
             <div class="columns">
