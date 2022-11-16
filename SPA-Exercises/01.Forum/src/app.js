@@ -1,4 +1,5 @@
 import { sendNewTopic } from '../src/newTopic.js'
+import { postCommentOnServer } from './commens.js';
 import { getTopics, displayTopics } from './home.js'
 // import '../src/newTopic.js'
 
@@ -8,6 +9,8 @@ displayTopics();
 
 window.api = {
     sendNewTopic,
-    getTopics
+    getTopics,
+    postCommentOnServer,
+    
 }
 
