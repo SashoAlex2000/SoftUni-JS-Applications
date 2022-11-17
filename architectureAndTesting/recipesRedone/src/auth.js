@@ -1,5 +1,4 @@
 import { get } from "./api.js";
-import { showCatalogView } from "./catalog.js";
 import { clearUserData } from "./util.js";
 
 
@@ -20,16 +19,12 @@ export function checkUserNav() {
 }
 
 // logout functionality 
-export async function onLogout() {
-    console.log('logging out ')
-    console.log(event)
+export async function onLogout(ctx) {
 
     get('/users/logout')
-
     clearUserData();
-
-    checkUserNav();
-    showCatalogView();
+    ctx.checkUserNav();
+    ctx.goto('catalog-link')
 
 }
 

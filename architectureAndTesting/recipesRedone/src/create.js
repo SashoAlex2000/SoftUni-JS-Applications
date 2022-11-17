@@ -6,10 +6,11 @@ createSubmitHandles('create-form', onCreate);
 
 const section = document.getElementById('create-view');
 section.remove();
+let ctx = null;
 
-export function showCreateView () {
-
-    document.querySelector('main').appendChild(section);
+export function showCreateView (context) {
+    ctx = context
+    ctx.render(section);
 
 }
 
@@ -20,6 +21,7 @@ async function onCreate ({ name, img, ingredients, steps }) {
 
     await post('/data/recipes', { name, img, ingredients, steps })
 
-    showCatalogView();
+    ctx.goto('catalog-link');
 
 }
+

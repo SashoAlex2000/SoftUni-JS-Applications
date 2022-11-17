@@ -1,6 +1,4 @@
 import { post } from "./api.js";
-import { checkUserNav } from "./auth.js";
-import { showCatalogView } from "./catalog.js";
 import { createSubmitHandles, setUserData } from "./util.js";
 
 createSubmitHandles('login-form', onLogin)
@@ -8,13 +6,16 @@ createSubmitHandles('login-form', onLogin)
 const section = document.getElementById('login-view');
 section.remove();
 
-export function showLoginView() {
+let ctx = null;
+
+export function showLoginView(innerCtx) {
+    ctx = innerCtx;
 
     // old way of displaying views in DOM
     // document.getElementById('login-view').style.display = 'block';
 
     // new way of displaying views in DOM
-    document.querySelector('main').appendChild(section);
+    ctx.render(section);
 
 
 }
@@ -24,8 +25,8 @@ async function onLogin({ email, password }) {
     const userData = await post('/users/login', { email, password });
     setUserData(userData);
 
-    checkUserNav();
-    showCatalogView();
+    ctx.checkUserNav();
+    ctx.goto('catalog-link');
 
 }
 

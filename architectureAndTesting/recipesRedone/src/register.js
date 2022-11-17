@@ -1,6 +1,4 @@
 import { post } from "./api.js";
-import { checkUserNav } from "./auth.js";
-import { showCatalogView } from "./catalog.js";
 import { createSubmitHandles, setUserData } from "./util.js";
 
 
@@ -10,10 +8,12 @@ createSubmitHandles('register-form', onRegister)
 const section = document.getElementById('register-view');
 section.remove();
 
-export function showRegisterView() {
-    // document.getElementById('register-view').style.display = 'block';
+let ctx = null;
 
-    document.querySelector('main').appendChild(section);
+export function showRegisterView(innerCtx) {
+    // document.getElementById('register-view').style.display = 'block';
+    ctx = innerCtx;
+    ctx.render(section);
 
 }
 
@@ -28,9 +28,8 @@ async function onRegister({ email, username, password, repass }) {
 
     setUserData(UserData)
 
-    checkUserNav();
-    showCatalogView();
+    ctx.checkUserNav();
+    ctx.goto('catalog-link');
 
 }
-
 

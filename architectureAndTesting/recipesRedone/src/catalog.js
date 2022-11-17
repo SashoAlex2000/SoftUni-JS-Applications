@@ -8,16 +8,18 @@ document.getElementById('recipe-list').addEventListener('click', openRecipe);
 const section = document.getElementById('catalog-view');
 section.remove();
 
-export async function showCatalogView (context) { // make this funct the API connection for app.js
+let ctx = null;
 
-    console.log(context);
+export async function showCatalogView (context) { // make this funct the API connection for app.js
+    ctx = context;
+
+    // render called first and displayRecipes with an empty arr to avoid a blank and frozen screen when loading
+    ctx.render(section);
+    displayRecipes([])
     const recipes = await getAllRecipes();
-    context.goto('details-view');
     
     // removed, since we shift the paradigm and we now dont hide and show elements
     // document.getElementById('catalog-view').style.display = 'block';
-
-    document.querySelector('main').appendChild(section);
 
     displayRecipes(recipes);
 
@@ -78,7 +80,7 @@ function openRecipe (event) {
 
         const id = event.target.id;
         console.log(id);
-        showDetailView(id);
+        ctx.goto('details-link', id)
     }
 
 }

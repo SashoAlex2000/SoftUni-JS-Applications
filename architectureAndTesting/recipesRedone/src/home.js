@@ -2,10 +2,10 @@
 const section = document.getElementById('home-view');
 section.remove();
 
-export function showHomeView () {
+export function showHomeView (ctx) {
 
     // document.getElementById('home-view').style.display = 'block';
-    document.querySelector('main').appendChild(section);
+    ctx.render(section);
 
 
 }
