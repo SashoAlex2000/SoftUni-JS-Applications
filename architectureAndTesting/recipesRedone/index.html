@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA cookbook demo</title>
+    <script src="./src/app.js" type="module"></script>
+    <style>
+        /* section{
+            display: none;
+        } */
+
+        label {
+            display: block;
+        }
+
+        .user,.guest {
+            display: none;
+        }
+
+        #catalog-view {
+            background-color: #F25757;
+            border-style: solid;
+            border-width: 2px;
+            border-color: black; 
+        }
+        li {
+            border-style: solid;
+            border-color: #FF9914;
+            margin: 6px;
+            background-color: #A4A8D1;
+        }
+
+        a {
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
+
+        body {
+            background-color: aquamarine;
+        }
+
+        h1 {
+            background-color: rgb(22, 112, 82);
+            margin-top: 0;
+            margin-left: 0;
+            margin-block-start: 0;
+            display:inline-block;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>
+        DEMO - SPA - Recipes
+    </h1>
+
+    <nav>
+        <a href="javasript:void(0)" id="home-link">Home</a>
+        <a href="javasript:void(0)" id="catalog-link">Catalog</a>
+        <a href="javasript:void(0)" id="login-link" class="guest">Log In</a>
+        <a href="javasript:void(0)" id="register-link" class="guest">Register</a>
+        <span class="user" id="welcome-mesg"></span>
+        <a href="javasript:void(0)" id="logout-link" class="user">Logout</a>
+        <a href="javasript:void(0)" id="create-link" class="user">Create</a>
+    </nav>
+
+    <main>
+        
+    </main>
+
+    <section id="home-view">
+        <h2>Welcome to the site!</h2>
+    </section>
+    
+
+    <section id="catalog-view">
+        <h2>All recipes</h2>
+
+        <ul id="recipe-list">
+            <li>First recipe</li>
+            <li>Second recipe</li>
+        </ul>
+
+    </section>
+
+    <section id="details-view">
+        <h2>Recipe Details</h2>
+
+        <h3 id="recipe-name"></h3>
+
+        <p>Ingredients</p>
+        <ul id="ingredients-list"></ul>
+        <p>Preparation steps</p>
+        <ul id="preparation-steps-list"></ul>
+
+    </section>
+
+    <section id="login-view">
+
+        <h2>Log In </h2>
+
+        <form id="login-form">
+
+            <label>Email: <input type="text" name="email"></label>
+            <label>Password: <input type="password" name="password"></label>
+
+            <button>Login</button>
+
+        </form>
+
+    </section>
+
+    <section id="register-view">
+
+        <h2>Register from here! </h2>
+
+        <form id="register-form">
+
+            <label>Email: <input type="text" name="email"></label>
+            <label>Username: <input type="text" name="username"></label>
+            <label>Password: <input type="password" name="password"></label>
+            <label>Repeat Password: <input type="password" name="repass"></label>
+
+            <button>Register</button>
+
+        </form>
+
+    </section>
+
+    <section id="create-view">
+
+        <h2>Create a new recipe!</h2>
+
+        <form id="create-form">
+
+            <label>Enter the Recipe name: <input type="text" name="name"></label>
+            <label>Enter the Recipe image: <input type="text" name="img"></label>
+            <label>Enter the Recipe ingredients: <textarea name="ingredients"></textarea></label>
+            <label>Enter the Recipe steps: <textarea name="steps"></textarea></label>
+
+            <button>Create</button>
+
+        </form>
+
+    </section>
+
+</body>
+</html>
+
