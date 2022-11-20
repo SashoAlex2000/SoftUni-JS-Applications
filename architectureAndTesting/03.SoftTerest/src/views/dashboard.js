@@ -1,4 +1,4 @@
-import { get } from "../api/api.js";
+import { del, get } from "../api/api.js";
 
 
 const section = document.getElementById('dashboard-holder');
@@ -62,6 +62,29 @@ async function showDetails(event) {
         console.log(response);
 
         const detailedSection = createDetailedSection(response);
+
+        const deleteSection = detailedSection.querySelector(".text-center");
+        const user = JSON.parse(sessionStorage.getItem("user")) || {};
+
+        if (deleteSection.id === user._id) {
+            deleteSection.style.display = 'block';
+        } else {
+            deleteSection.style.display = 'none';
+        }
+    
+        const deleteBTN = detailedSection.querySelector("A");
+
+        deleteBTN.addEventListener('click', onDelete);
+
+        async function onDelete (event) {
+
+            event.preventDefault();
+            const response = await del(`data/ideas/${event.target.id}`);
+
+            ctx.goto('Dashboard');
+
+        }
+
         ctx.showSection(detailedSection);
 
     }
@@ -83,8 +106,8 @@ function createDetailedSection(someData) {
                 <p class="infoType">Description:</p>
                 <p class="idea-description">${someData.description}</p>
             </div>
-            <div class="text-center">
-                <a class="btn detb" href="javascrpit:void(0)">Delete</a>
+            <div class="text-center" id="${someData._ownerId}">
+                <a class="btn detb" href="javascrpit:void(0)" id="${someData._id}">Delete</a>
             </div>
     `;
 
