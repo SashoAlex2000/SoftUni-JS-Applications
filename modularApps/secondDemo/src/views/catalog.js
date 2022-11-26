@@ -36,7 +36,8 @@ function composeURL(page, search) {
 }
 
 export async function showCatalog (ctx) {
-    console.log(ctx)
+    console.log('the user in context is ')
+    console.log(ctx.user)
     const page = Number(ctx.query.page) || 1;
     const search = ctx.query.search || '';
     ctx.render(html `<p>LOADING &hellip; </p>`)
