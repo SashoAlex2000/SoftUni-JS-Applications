@@ -1,0 +1,10 @@
+1. Extract project and examine their skeleton
+2. Setup NPM , install dependencies 
+3. Examine HTML files, make general template MAP
+4. Create app entry point/ controller and route placeholders 
+5. API -> beforehand maybe :) / remote requests 
+6. i forgor
+7. Implement logic
+-static page template 
+-implement data request logic
+-event listeners
