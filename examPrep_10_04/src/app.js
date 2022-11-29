@@ -1,9 +1,11 @@
 import {page, render} from './lib.js'
+import { getUserData } from './util.js';
 import { showCreate } from './views/create.js';
 import { showDashboard } from './views/dashboard.js';
 import { showDetails } from './views/details.js';
 import { showEdit } from './views/edit.js';
 import { showLogin } from './views/login.js';
+import { showProfile } from './views/myposts.js';
 import { updateNav } from './views/nav.js';
 import { showRegister } from './views/register.js';
 
@@ -15,7 +17,7 @@ page('/login', showLogin)
 page('/register', showRegister)
 page('/create', showCreate)
 page('/dashboard', '/')
-page('/myposts', () => console.log('these are my posts'))
+page('/myposts', showProfile)
 page('/dashboard/:id', showDetails)
 page('/edit/:id', showEdit)
 
@@ -27,11 +29,11 @@ function decorateContext (ctx, next) {
     ctx.render = renderMain
     ctx.updateNav = updateNav;
 
-    // const user = getUserData();
+    const user = getUserData();
 
-    // if (user) {
-    //     ctx.user = user;
-    // }
+    if (user) {
+        ctx.user = user;
+    }
 
     next()
 

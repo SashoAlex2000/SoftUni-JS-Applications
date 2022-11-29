@@ -34,3 +34,10 @@ export async function updateListing(offerId, data) {
 
 }
 
+export async function getUserListings(userId) {
+
+    const data = await get(`/data/posts?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`)
+    return data;
+
+}
+
