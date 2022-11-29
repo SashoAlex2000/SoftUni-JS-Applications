@@ -17,7 +17,7 @@ const navTemplate = (hasUser) => html `
           ${hasUser ? html `
           <div class="user">
             <a href="/create">Create Offer</a>
-            <a href="javascript:void(0)">Logout</a>
+            <a @click=${onLogout} href="javascript:void(0)">Logout</a>
           </div>` : html `
           <div class="guest">
             <a href="/login">Login</a>
@@ -34,11 +34,11 @@ export async function updateNav () {
 
 }
 
-// function onLogout () {
+function onLogout () {
 
-//   logout();
-//   updateNav();
-//   page.redirect('/');
+  logout();
+  updateNav();
+  page.redirect('/');
 
-// }
+}
 

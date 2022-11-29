@@ -1,35 +1,35 @@
 import { del, get, post, put } from "./api.js";
 
 
-export async function getAllShoes () {
+export async function getAllOffers () {
 
-    const data = await get('/data/shoes?sortBy=_createdOn%20desc')
+    const data = await get('/data/offers?sortBy=_createdOn%20desc')
     return data;
 
 }
 
-export async function getShoeById (id) {
+export async function getOfferById (id) {
 
-    const data = await get(`/data/shoes/${id}`)
+    const data = await get(`/data/offers/${id}`)
     return data;
 
 }
 
-export async function createShoe (shoeData) {
+export async function createOffer (offerData) {
 
-    const data = await post('/data/shoes', shoeData)
+    const data = await post('/data/offers', offerData)
     return data;
 
 }
 
-export async function deleteShoe(shoeId) {
+export async function deleteOffer(offerId) {
 
-    await del(`/data/shoes/${shoeId}`);
+    await del(`/data/offers/${offerId}`);
 
 }
 
-export async function updateShoe(shoeId, data) {
+export async function updateOffer(offerId, data) {
 
-    await put(`/data/shoes/${shoeId}`, data)
+    await put(`/data/offers/${offerId}`, data)
 
 }
