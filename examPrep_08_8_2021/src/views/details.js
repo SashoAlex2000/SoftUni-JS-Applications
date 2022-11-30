@@ -1,9 +1,10 @@
 
 import { deleteItem, getItemById } from '../api/data.js';
+import { getAllLIkes, getCurrentUserLikes, likePost } from '../api/likes.js';
 import { html, nothing } from '../lib.js';
 import { createSubmitHandler } from '../util.js';
 
-const detailsTemplate = (currentItem, canModify, onDelete) => html `
+const detailsTemplate = (currentItem, canModify, totalLikes, canCurrentUserLike, onDelete, onLike) => html `
 <section id="details-page" class="details">
 <div class="book-information">
     <h3>${currentItem.title}</h3>
@@ -17,6 +18,14 @@ const detailsTemplate = (currentItem, canModify, onDelete) => html `
     </div>
     ` : nothing}
 
+    ${canCurrentUserLike ? html `<a @click=${onLike} class="button" href="javascript:void(0)">Like</a>` : nothing}
+
+    <!-- ( for Guests and Users )  -->
+    <div class="likes">
+        <img class="hearts" src="/images/heart.png">
+        <span id="total-likes">Likes: ${totalLikes}</span>
+    </div>
+
 </div>
 <div class="book-description">
     <h3>Description:</h3>
@@ -25,9 +34,6 @@ const detailsTemplate = (currentItem, canModify, onDelete) => html `
 </section>
 `;
 
-const createItemCard = (item) => html `
-
-`
 
 export async function showDetails (ctx) {
 
@@ -43,7 +49,17 @@ export async function showDetails (ctx) {
     console.log(canModify)
     console.log(userId)
 
-    ctx.render(detailsTemplate(currentItem, canModify, onDelete));
+    const totalLikes = await getAllLIkes(id);
+
+    let canCurrentLike;
+
+    if (userId) {
+        canCurrentLike = await getCurrentUserLikes(id, userId) == 0;
+    }
+
+    const canCurrentUserLike = !!userId && canCurrentLike && userId != currentItem._ownerId;
+
+    ctx.render(detailsTemplate(currentItem, canModify,totalLikes, canCurrentUserLike, onDelete, onLike));
 
     async function onDelete () {
 
@@ -55,6 +71,13 @@ export async function showDetails (ctx) {
             ctx.page.redirect('/')
 
         }
+
+    }
+
+    async function onLike () {
+
+        await likePost(id)
+        ctx.page.redirect(`/dashboard/${id}`)
 
     }
 
