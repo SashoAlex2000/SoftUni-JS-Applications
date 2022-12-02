@@ -15,6 +15,7 @@ const root = document.querySelector('main');
 
 
 page(decorateContext);
+page(parseQuery)
 page('/', showHome)
 page('/login', showLogin)
 page('/register', showRegisteer)
@@ -47,4 +48,21 @@ function renderMain(content) {
 
     render(content, root);
 
+}
+
+function parseQuery (ctx, next) {
+
+    ctx.query = {
+        // initialize empty object first to avoid error.
+    }
+
+    if (ctx.querystring) {
+        const query = Object.fromEntries(ctx.querystring
+            .split('&')
+            .map(e => e.split('=')))
+        Object.assign(ctx.query, query);
+    }
+
+    next();
+    
 }
