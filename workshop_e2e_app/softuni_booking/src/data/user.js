@@ -34,7 +34,8 @@ export async function login (email, password) {
 
 export async function logout () {
 
-    const result = get('/logout');
+    // investigate further on how to logout from back4app
+    // const result = get('/logout');
     clearUserData();
 
 }

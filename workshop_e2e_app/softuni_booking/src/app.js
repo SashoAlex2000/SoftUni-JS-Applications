@@ -11,6 +11,10 @@ import { registerView } from './views/register.js';
 import { addUserNav } from './middleware/userNav.js';
 import { navTemplate } from './views/nav.js';
 import { homeView } from './middleware/home.js';
+import { logoutAction } from './views/logout.js';
+import { preload } from './middleware/preloader.js';
+import { hasUser } from './middleware/guards.js';
+import { detailsView } from './views/details.js';
 
 page (addRender(document.querySelector('main'), document.querySelector('header')));
 page(addSesstion(getUserData));
@@ -18,9 +22,10 @@ page(addUserNav(navTemplate))
 
 page('/', homeView);
 page('/rooms', catalogView)
-page('/rooms/:id', ({params: {id}}) => console.log('details', id))
-page('/create', createView)
+page('/rooms/:id', preload('id', 'rooms'), detailsView)
+page('/create', hasUser() ,createView)
 page('/login', loginView)
 page('/register', registerView)
+page('/logout', logoutAction)
 
 page.start()
