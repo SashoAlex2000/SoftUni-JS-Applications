@@ -1,7 +1,7 @@
 
 import * as roomService from '../data/room.js';
 
-export function preload (param, collection) {
+export function preloadRoom (param) {
     return async function (ctx, next) {
         const id = ctx.params[param];
 

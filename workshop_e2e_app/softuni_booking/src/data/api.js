@@ -34,8 +34,9 @@ async function request(method, url='/', data) {
 
     try {
 
+        console.log(url);
         const response = await fetch(host + url, options);
-
+        console.log(response)
         if (response.status == 204) {
             return response
         }

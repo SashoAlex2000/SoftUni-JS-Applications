@@ -12,9 +12,10 @@ import { addUserNav } from './middleware/userNav.js';
 import { navTemplate } from './views/nav.js';
 import { homeView } from './middleware/home.js';
 import { logoutAction } from './views/logout.js';
-import { preload } from './middleware/preloader.js';
-import { hasUser } from './middleware/guards.js';
+import { preloadRoom } from './middleware/preloader.js';
+import { hasUser, isOwner } from './middleware/guards.js';
 import { detailsView } from './views/details.js';
+import { editView } from './views/edit.js';
 
 page (addRender(document.querySelector('main'), document.querySelector('header')));
 page(addSesstion(getUserData));
@@ -22,8 +23,9 @@ page(addUserNav(navTemplate))
 
 page('/', homeView);
 page('/rooms', catalogView)
-page('/rooms/:id', preload('id', 'rooms'), detailsView)
+page('/rooms/:id', preloadRoom('id', 'rooms'), detailsView)
 page('/create', hasUser() ,createView)
+page('/edit/:id', preloadRoom('id', 'rooms'), isOwner(), editView)
 page('/login', loginView)
 page('/register', registerView)
 page('/logout', logoutAction)
