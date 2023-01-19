@@ -3,21 +3,32 @@ import { get, post } from "./api.js";
 
 
 const endpoints = {
-    'reservationsByRoomId': (roomId) => '/classes/Reservation?where=' + encodeObject(filterRelation('room', 'Room', roomId)),
+    'reservationsByRoomId': (roomId) => '/classes/Reservation?where=' + encodeObject(filterRelation('room', 'Room', roomId)) + '&include=owner',
     'reservations': '/classes/Reservation'
 }
 
 
 export async function getByRoomId(roomId) {
-    return get(endpoints.reservationsByRoomId(roomId));
+
+    const data = await get(endpoints.reservationsByRoomId(roomId));
+    // got through the reservations which back4app returns
+    // and change the startDate/endDate to just the iso format, not a whole object
+    data.results.forEach(r => {
+        r.startDate = new Date(r.startDate.iso)
+        r.endDate = new Date(r.endDate.iso)
+    });
+
+    return data;
+
 }
 
-export async function create(roomData, roomId, userId) {
+export async function create(roomData, userId) {
 
     roomData = addOwner(roomData, userId);
     roomData.startDate = encodeDate(roomData.startDate);
     roomData.endDate = encodeDate(roomData.endDate);
-    roomData.room = createPointer('Room', roomId);
+    roomData.room = createPointer('Room', roomData.room);
+    roomData.host = createPointer('_User', roomData.host);
     return post(endpoints.reservations, roomData)
 
 }

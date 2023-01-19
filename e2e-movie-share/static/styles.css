@@ -1,0 +1,95 @@
+
+body {
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.page-footer {
+    height: 4rem;
+    background: #B5C2B7;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*width: 100vw;*/
+    margin-bottom: 0;
+}
+
+.page-footer p {
+    margin-bottom: 0;
+}
+
+.footer-logo,
+.page-footer a {
+    color: #F06449
+}
+
+
+.footer-logo:hover,
+.page-footer a:hover {
+    transition: var(--transition);
+    color: #c42d0d
+}
+
+#main {
+    width: 90vw;
+    max-width: 1120px;
+    margin: 0 auto;
+    /*padding-top: 2rem;*/
+    min-height: calc(100vh - (6rem + 4rem));
+}
+
+main {
+    margin: 0px;
+    
+}
+
+h4,h3, h2, h1 {
+    margin-top: 0px;
+}
+
+nav {
+    display: flex;
+    background: #8C93A8;
+    height: 6rem;
+    align-items: center;
+}
+
+nav a {
+    margin-left: 2rem;
+    color: #FAA916;
+}
+
+nav a:hover {
+    transition: 0.3s ease-in-out all;
+    color: #48d610;
+}
+
+.first-nav {
+    margin-right: 58vw;
+}
+
+.movie-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.catalog-img {
+    width: 50%;
+    height: 10rem;
+}
+
+.form-wrapper {
+    justify-content: center;
+}
+
+.create-movie-form input{
+    display: block;
+}
+
+.create-movie-form textarea{
+    display: block;
+}

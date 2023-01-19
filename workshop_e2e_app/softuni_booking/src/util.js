@@ -47,7 +47,7 @@ export function createSubmitHandler(callback) {
 
 }
 
-// creates and object with property field, which has a key 'field' and property - Pointer object with the necessary attributes
+// creates an object with property field, which has a key 'field' and property - Pointer object with the necessary attributes
 export function filterRelation(field, collection, objectId) {
 
     const relation = {

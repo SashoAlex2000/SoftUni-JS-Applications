@@ -61,4 +61,5 @@ async function request(method, url='/', data) {
 export const get = request.bind(null, 'get')
 export const post = request.bind(null, 'post')
 export const put = request.bind(null, 'put')
-export const del = request.bind(null, 'delelete')
+// export const del = request.bind(null, 'delelete')  I wonder why it wasn't deleleting :DDDD
+export const del = request.bind(null, 'delete')

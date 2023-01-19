@@ -3,19 +3,24 @@ import { createSubmitHandler } from '../util.js';
 import * as roomService from '../data/room.js';
 import { repeat } from '../lib/directives/repeat.js'
 import { hasUser } from '../middleware/guards.js';
-
+import {  } from '../lib/directives/repeat.js'
 import * as reserVationService from '../data/reservation.js'
 
 
-const detailsTemplate = (room, isOwner, hasUser, onDelete, onBook) => html`
+const detailsTemplate = (room, hasUser, onDelete, onBook) => html`
 <h2>${room.name}</h2>
 <p>Location: ${room.location}</p>
 <p>Beds: ${room.beds}</p>
-${hasUser && !isOwner ? reservationForm(onBook) : nothing}
-${isOwner ? html`
+${hasUser && !room.isOwner ? reservationForm(onBook) : nothing}
+${room.isOwner ? html`
 <a href="/edit/${room.objectId}">Edit</a>
-<a href="javascript:void(0) @click=${onDelete}">Delete</a>
+<a href="javascript:void(0)" @click=${onDelete}>Delete</a>
 `: nothing}
+${hasUser ? html `
+<ul>
+    ${repeat(room.reservations, r => r.objectId, reservationCard)}
+</ul>
+` : nothing}
 `;
 
 
@@ -27,19 +32,26 @@ const reservationForm = (onSubmit) => html`
 </form>
 `;
 
+const reservationCard = (reservation) => html `
+<li>From ${reservation.startDate.toISOString().slice(0,10)} to:
+ ${reservation.endDate.toISOString().slice(0,10)} ; made by: ${reservation.owner.username}</li>
+` 
+
 
 export async function detailsView(ctx) {
 
     const id = ctx.params.id;
+    const room = ctx.data;
     const hasUser = Boolean(ctx.user);
-    const isOwner = ctx.data?.owner?.objectId === ctx.user?.objectId;
+    room.isOwner = room.owner?.objectId === ctx.user?.objectId;
+    room.reservations = [];
 
-    if (isOwner) {
-        const { results: reservations } = await reserVationService.getByRoomId(id);
-        console.log(reservations);
+    if (hasUser) {
+        const result = await reserVationService.getByRoomId(id);
+        room.reservations = result.results;
     }
 
-    ctx.render(detailsTemplate(ctx.data, isOwner, hasUser, onDelete, createSubmitHandler(book)));
+    ctx.render(detailsTemplate(ctx.data, hasUser, onDelete, createSubmitHandler(book)));
 
     async function onDelete() {
         const choice = confirm('Are you sure you want to permanently delete your offer?');
@@ -67,9 +79,11 @@ export async function detailsView(ctx) {
         const reservationData = {
             startDate,
             endDate,
+            room: id,
+            host: ctx.data.owner.objectId
         }
 
-        const result = await reserVationService.create(reservationData, id, ctx.user.objectId);
+        const result = await reserVationService.create(reservationData, ctx.user.objectId);
         ctx.page.redirect(`/rooms/${id}`);
 
     }
