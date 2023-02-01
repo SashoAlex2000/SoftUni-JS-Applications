@@ -19,7 +19,7 @@ import { authRequiredGuard } from './middleware/guards.js';
 
 
 // middlewares added, loading ctx
-page(addRender(document.getElementById('main'), document.querySelector('header')));
+page(addRender(document.getElementById('main'), document.querySelector('nav')));
 page(addSession(getUserData));
 page(addUserNav(navTemplate));
 

@@ -1,4 +1,6 @@
 
+/* Document-wide */
+
 body {
     margin: 0px;
 }
@@ -6,6 +8,17 @@ body {
 a {
     text-decoration: none;
 }
+
+* {
+    box-sizing: border-box;
+    /* font-family: 'Kumbh Sans', sans-serif; */
+}
+
+h2 {
+    margin: 0;
+}
+
+/* Footer */
 
 .page-footer {
     height: 4rem;
@@ -34,43 +47,102 @@ a {
     color: #c42d0d
 }
 
-#main {
-    width: 90vw;
-    max-width: 1120px;
-    margin: 0 auto;
-    /*padding-top: 2rem;*/
-    min-height: calc(100vh - (6rem + 4rem));
-}
+/* General ; main */
 
-main {
-    margin: 0px;
-    
-}
+/* .main {
+    background-color: #141414;
+} */
 
-h4,h3, h2, h1 {
-    margin-top: 0px;
-}
+/* Navigation */
 
 nav {
     display: flex;
-    background: #8C93A8;
-    height: 6rem;
+    height: 5rem;
+    background-color: #131313;
     align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
-nav a {
-    margin-left: 2rem;
-    color: #FAA916;
-}
-
-nav a:hover {
-    transition: 0.3s ease-in-out all;
-    color: #48d610;
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
 }
 
 .first-nav {
-    margin-right: 58vw;
+    margin-left: 2rem;
 }
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+
+}
+
+.navbar-menu a{
+    margin-right: 1rem;
+    text-transform: uppercase;
+    color:azure;
+}
+
+.first-nav {
+    background-color: #ff8177;
+    background-image: linear-gradient(to top, #910b2d 0%, #8311ec 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-backdrop-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+
+/* Home page */
+
+.home-page {
+    background: #131313;
+    height: 90vh;
+}
+
+.home-container {
+    position: relative;
+    height: 25rem;
+    width: 65rem;
+    margin:auto;
+    padding-top: 2rem;
+    background-image: url('./images/cinema.jpeg');
+    align-items: center;
+}
+
+.home-image-greet {
+    position: absolute;
+    width: 100%;
+    margin:auto;
+    text-align: center;
+    align-items: center;
+    top: 50%;
+}
+
+.home-image-greet h2{
+    text-transform: capitalize;
+    text-decoration: wavy;
+    font-weight: bold;
+    color: azure;
+    font-size: 3.25rem;
+    text-shadow: 2px 2px #020101;
+
+}
+
+/* Catalog */
 
 .movie-wrapper {
     display: grid;
@@ -81,6 +153,9 @@ nav a:hover {
     width: 50%;
     height: 10rem;
 }
+
+
+/* Create Form */
 
 .form-wrapper {
     justify-content: center;
