@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+</head>
+
+<body>
+    <section class="blue">
+        <h1>Welcome To Bulgaria</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, culpa.</p>
+        <div class="curve"></div>
+    </section>
+    <section>
+        <h1>Welcome To Bulgaria</h1>
+        <p>Facilis reiciendis ad, quaerat cumque eligendi sunt autem quibusdam laborum.</p>
+    </section>
+    <section class="bubble">
+        <h1>Welcome To Bulgaria</h1>
+        <p>Ut cumque pariatur iure id sit magni vitae totam obcaecati?</p>
+    </section>
+    <section class="dark">
+        <h1>Welcome To Bulgaria</h1>
+        <p>Aspernatur rerum iusto exercitationem ullam reprehenderit tempore natus tempora aut?</p>
+    </section>
+    <section>
+        <h1>Welcome To Bulgaria</h1>
+        <p>Vero dolorum harum cumque, consequuntur nulla officiis! Natus, voluptatem quod.</p>
+    </section>
+    <section class="red">
+        <h1>Welcome To Bulgaria</h1>
+        <p>Ex, quae et! Quo repellendus nobis soluta officia quidem quia.</p>
+
+        <div class="wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+    <div class="spacer layer1"></div>
+    <section>
+        <h1>Welcome To Bulgaria</h1>
+        <p>Quasi voluptas ut officiis architecto laboriosam quidem? Dolores, ratione magni?</p>
+    </section>
+    <div class="spacer layer1 flip"></div>
+    <section class="red">
+        <h1>Welcome To Bulgaria</h1>
+        <p>Facilis, quo ducimus facere fugit fugiat ipsum architecto pariatur natus.</p>
+        <svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg" class="blob-motion"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+
+            <g transform="translate(478.4518040067069 284.4058439136028)">
+                <path id="blob1"
+                    d="M122.2 -130C156.7 -87.7 181.8 -43.8 190.8 9C199.8 61.8 192.5 123.5 158 168.2C123.5 212.8 61.8 240.4 0 240.4C-61.8 240.4 -123.5 212.8 -173.5 168.2C-223.5 123.5 -261.8 61.8 -248.6 13.2C-235.4 -35.4 -170.7 -70.7 -120.7 -113C-70.7 -155.4 -35.4 -204.7 4.2 -208.9C43.8 -213.2 87.7 -172.3 122.2 -130"
+                    fill="#BB004B"></path>
+            </g>
+            <g transform="translate(440.30917374658685 320.2154500074305)">
+                <path id="blob2" style="visibility: hidden;"
+                    d="M167.4 -180.6C193.4 -141.4 174.7 -70.7 160.7 -14C146.7 42.7 137.3 85.3 111.3 119.5C85.3 153.7 42.7 179.3 -3.4 182.7C-49.5 186.2 -99 167.3 -124 133.2C-149 99 -149.5 49.5 -154.7 -5.2C-159.9 -59.9 -169.7 -119.7 -144.7 -158.9C-119.7 -198.1 -59.9 -216.5 5.4 -222C70.7 -227.4 141.4 -219.8 167.4 -180.6"
+                    fill="#BB004B"></path>
+            </g>
+        </svg>
+
+        <script>
+            const animation = KUTE.fromTo(
+                '#blob1',
+                { path: '#blob1' },
+                { path: '#blob2' },
+                { repeat: 999, duration: 3000, yoyo: true }
+            )
+
+            animation.start()
+        </script>
+    </section>
+    <div class="spacer layer1"></div>
+</body>
+
+</html>
