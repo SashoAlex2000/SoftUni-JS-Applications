@@ -16,6 +16,7 @@ import { create, getAllMovies } from './data/movie.js';
 import { createMovieView } from './views/create.js';
 import { catalogView } from './views/catalog.js';
 import { authRequiredGuard } from './middleware/guards.js';
+import { showDetails } from './views/details.js';
 
 
 // middlewares added, loading ctx
@@ -29,6 +30,9 @@ page('/login', loginView);
 page('/register', registerView);
 page('/logout', onLogout);
 page('/catalog', catalogView);
+// page('/test', () => console.log('test111??'));
+// page('/test/:id', () => console.log('id test??'));
+page('/catalog/:id', showDetails);
 page('/create', authRequiredGuard(), createMovieView);
 
 // starting the app

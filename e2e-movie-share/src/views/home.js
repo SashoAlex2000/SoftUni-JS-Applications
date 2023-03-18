@@ -9,7 +9,7 @@ const homeTemplate = (currUser) => html `
             <h2>Welcome back, ${currUser.username}</h2>
             ` : html `
             <h2>Welcome to MovieShare</h2>
-            </p>Sign In / Sign Up if you want to experience the beautiful world of moveis</p>
+            </p><a href="/login">Sign In</a> / <a href="/register">Sign Up</a> if you want to experience the beautiful world of moveis</p>
             `}
         </div>
     </div>

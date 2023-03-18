@@ -15,7 +15,7 @@ const movieCard = (movie) => html `
         ${movie.imageUrl ? html `<img src=${movie.imageUrl} class="catalog-img">`: nothing}
         <p>Release date: ${movie.year}<p>
         <p>Description: ${movie.description}<p>
-        <p>${movie.rating}<p>
+        <a href="/catalog/${movie.objectId}">Details</a>
     </div>
 `;
 

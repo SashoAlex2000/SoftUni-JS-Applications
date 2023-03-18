@@ -51,7 +51,7 @@ export async function createMovieView (ctx) {
             imageUrl
         }
         
-        const currentUserId = ctx.user?.objectId
+        const currentUserId = ctx.user?.objectId;
 
         await create(movieData, currentUserId);
         ctx.page.redirect('/');
