@@ -168,3 +168,10 @@ nav {
 .create-movie-form textarea{
     display: block;
 }
+
+
+/* Detail comments */
+
+.owner-comment {
+    color: red;;
+}

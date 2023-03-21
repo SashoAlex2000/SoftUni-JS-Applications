@@ -4,7 +4,7 @@ import { get, post } from "./api.js";
 
 const endpoints = {
     'comments': '/classes/Comment',
-    'commentsForCurrentMovie': (movieId) => '/classes/Comment?where=' + encodeObject(filterRelation('moviePointer', "Movie", movieId)),
+    'commentsForCurrentMovie': (movieId) => '/classes/Comment?where=' + encodeObject(filterRelation('moviePointer', "Movie", movieId)) + '&include=owner',
 }
 
 export async function getAllComments () {

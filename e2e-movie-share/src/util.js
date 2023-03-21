@@ -84,3 +84,34 @@ export function filterRelation (field, collection, objectId) {
 export function encodeObject(object) {
     return encodeURIComponent(JSON.stringify(object));
 }
+
+
+// function which takes the list of ratings returned when accessing the detail page of a movie,
+// and returns an object containing the necessary properties -> average, number of ratings,
+// and if the current user has rated
+export function createRatingObject (listOfRatings, currentUser) {
+
+    let result = {
+
+    }
+
+    const length = listOfRatings.length;
+    let sum = 0;
+    let hasRated = false;
+
+    for (let rating of listOfRatings) {
+        sum += rating.rating;
+        if (rating.owner.objectId == currentUser) {
+            hasRated = true;
+        }
+    }
+
+    const average = (sum / length).toFixed(2);
+
+    result.hasRated = hasRated;
+    result.length = length;
+    result.average = average;
+
+    return result;
+
+}
