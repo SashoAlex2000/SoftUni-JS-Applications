@@ -5,19 +5,24 @@ import { html } from "../lib/lit-html.js";
 import { createRatingObject, createSubmiteHandler } from "../util.js";
 import { repeat } from '../lib/directives/repeat.js'
 import { classMap } from '../lib/directives/class-map.js'
-import { getMovieRatingsById, postRating } from "../data/movieRating.js";
+import { deleteRating, getMovieRatingsById, postRating } from "../data/movieRating.js";
 
 const detailTemplate = (onComment, onRate, movie, currentComments, ratingObject) => html`
     <h1>${movie.name}</h1>
     <h3>${movie.year}</h3>
     <h3>${movie.rating}</h3>
     <p>${movie.description}</p>
-    <p>Movie Rating: ${ratingObject.average} / 5 (${ratingObject.length})</p>
+    <p class="rating holder" id="${ratingObject.ratingId}">
+        Movie Rating: ${ratingObject.average} / 5 (${ratingObject.length})
+    </p>
     <br>
 
     <form @submit=${onRate}>
         <label for="rating">Rate this movie</label>
 
+        ${ratingObject.hasRated ? html `
+        <p>Your Rating: ${ratingObject.currentUserRating}</p>
+        ` : html `
         <select id="rating" name="rating">
             <option calue="1">1</option>
             <option calue="2">2</option>
@@ -25,11 +30,12 @@ const detailTemplate = (onComment, onRate, movie, currentComments, ratingObject)
             <option calue="4">4</option>
             <option calue="5">5</option>
         </select>
-
+        `}
+        
         ${ratingObject.hasRated ? html `
-        <button disabled>Unrate</button>
+        <button>Unrate</button>
         ` : html `
-        <button>rate this</button>
+        <button>Rate</button>
         `}
         
     </form>
@@ -63,22 +69,20 @@ export async function showDetails(ctx) {
     console.log(ctx.params);
     const id = ctx.params.id;
     const movie = await getMovieById(id);
-    console.log(movie);
 
     const result = await getSpecificComments(id);
     const currentComments = result.results;
-    console.log(currentComments);
 
     currentComments.map(c => c.isOwnerOfMovie = Boolean(c.owner.objectId == movie.owner.objectId));
 
     console.log(currentComments);
-    console.log(ctx.user);
 
     let allRatings = await getMovieRatingsById(id);
     allRatings = allRatings.results;
     console.log(allRatings);
 
     const ratingObject = createRatingObject(allRatings, ctx.user?.objectId);
+    console.log(ratingObject);
 
     ctx.render(detailTemplate(createSubmiteHandler(onCommentCreate), createSubmiteHandler(onRate),
     movie, currentComments, ratingObject));
@@ -109,13 +113,36 @@ export async function showDetails(ctx) {
 
     }
 
-    async function onRate({ rating }) {
+    async function onRate({ rating }, rateEvent) {
 
-        const ratingData = {
-            rating: Number(rating),
+        let button;
+        
+        for (let element of rateEvent.children) {
+            if (element.tagName == 'BUTTON') {
+                button = element;
+                break;
+            }
+        }
+        console.log(button.textContent);
+
+        if (button.textContent == 'Rate') {
+            const ratingData = {
+                rating: Number(rating),
+            }
+    
+            if (ctx.user?.objectId == undefined) {
+                return alert('You must be logged in to rate this!')
+            }
+    
+            await postRating(ratingData, id, ctx.user.objectId);
+        } else {
+            const currentRatingId = document.getElementsByClassName('rating holder')[0].id;
+            console.log(currentRatingId);
+            await deleteRating(currentRatingId);
         }
 
-        await postRating(ratingData, id, ctx.user.objectId);
+        ctx.page.redirect(`/catalog/${id}`);
+
     }
 
 }

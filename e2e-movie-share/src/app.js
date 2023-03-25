@@ -17,12 +17,15 @@ import { createMovieView } from './views/create.js';
 import { catalogView } from './views/catalog.js';
 import { authRequiredGuard } from './middleware/guards.js';
 import { showDetails } from './views/details.js';
+import { addQuery } from './middleware/parseQuery.js';
 
 
 // middlewares added, loading ctx
 page(addRender(document.getElementById('main'), document.querySelector('nav')));
 page(addSession(getUserData));
 page(addUserNav(navTemplate));
+// 20230325 -> loading the middleware, which loads ctx with any querystring params
+page(addQuery());
 
 // navigation 
 page('/', showHome);

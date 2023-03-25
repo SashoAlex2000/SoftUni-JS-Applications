@@ -35,5 +35,8 @@ export async function login (email, password) {
 
 
 export async function logout () {
+    // 20230325 -> supposedly, this is everything needed in order to logout, the needed ApplicationId and 
+    // JS key are already there, and X-Parse-Session-Token is taken automatically in the request in api.js
+    await post('/logout');
     removeUserData();
 }
