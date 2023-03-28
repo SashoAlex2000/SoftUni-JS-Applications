@@ -12,9 +12,18 @@ const endpoints = {
         "name": {"$in": [searchName,]},
     })}`,
     // using a regex it works
-    // TODO work on capitalized words
+    // TODO work on capitalized words - DONE; using $or to cycle through different regex variants;
     'moviesBySearchWordRegex': (searchName)=>`/classes/Movie?where=${encodeObject({
-        "name": {"$regex": searchName},
+        "$or": [
+            {"name": {"$regex": searchName}},
+            {"name": {"$regex": searchName.toUpperCase()}},
+            {"name": {"$regex": searchName.toLowerCase()}},
+            {"name": {"$regex": searchName[0].toUpperCase() + searchName.substring(1)}},
+            {"name": {"$regex": searchName[0].toUpperCase() + searchName.substring(1).toLowerCase()}},
+            {"name": {"$regex": searchName[0].toLowerCase() + searchName.substring(1)}},
+
+        ],
+        
     })}`,
 }
 
