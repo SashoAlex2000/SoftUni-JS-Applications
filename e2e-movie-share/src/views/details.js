@@ -13,7 +13,7 @@ const detailTemplate = (onComment, onRate, movie, currentComments, ratingObject)
     <h3>${movie.rating}</h3>
     <p>${movie.description}</p>
     <p class="rating holder" id="${ratingObject.ratingId}">
-        Movie Rating: ${ratingObject.average} / 5 (${ratingObject.length})
+        Movie Rating: ${!isNaN(ratingObject.average) ? ratingObject.average: "-"} / 5 (${ratingObject.length})
     </p>
     <br>
 
