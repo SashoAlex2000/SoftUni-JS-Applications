@@ -25,6 +25,9 @@ const endpoints = {
         ],
         
     })}`,
+    'moviesByFilter' : (listOfFilters) => `/classes/Movie?where=${encodeObject({
+        "rating": {"$in": listOfFilters},
+    })}` 
 }
 
 
@@ -50,6 +53,30 @@ export async function getMovieBySearchWord (searchWord) {
     
     // works with the regex
     const data = await get(endpoints.moviesBySearchWordRegex(searchWord));
+    return data;
+
+}
+
+export async function getMovieBySearchWordAndFilter (searchWord, filterList) {
+    
+    const data = await get(endpoints.moviesBySearchWordRegex(searchWord));
+    const result = [];
+
+    for (let i = 0; i < data.results.length; i++) {
+        const currentMovie = data.results[i];
+        if (filterList.indexOf(currentMovie.rating) >= 0) {
+            result.push(currentMovie);
+        }
+    }
+    console.log(result);
+    return result;
+
+}
+
+
+export async function getMoviesByFilter (filterList) {
+
+    const data = await get(endpoints.moviesByFilter(filterList));
     return data;
 
 }

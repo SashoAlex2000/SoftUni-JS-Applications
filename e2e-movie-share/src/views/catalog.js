@@ -1,7 +1,7 @@
 
 import { html, nothing } from "../lib/lit-html.js";
 import { repeat } from '../lib/directives/repeat.js'
-import { getAllMovies, getMovieBySearchWord } from "../data/movie.js";
+import { getAllMovies, getMovieBySearchWord, getMovieBySearchWordAndFilter, getMoviesByFilter } from "../data/movie.js";
 import { movieOptions } from "../util.js";
 
 const catalogTemplate = (movies, onSearch, isSearch, options) => html `
@@ -20,12 +20,12 @@ const catalogTemplate = (movies, onSearch, isSearch, options) => html `
     </div>
     <div class="rating-filter-wrapper">
         <div class="rating-filter">
-            <form>
-                <label for="rating-filter"> Choose Categories: </label>    
+            <form class="rating-filter-form">
+                <label for="rating-filter"> Choose Categories: </label>
+                <br>    
                 <select name="rating" id="rating-filter" multiple>
                     ${repeat(options, optionsCard)}
                 </select>
-                <button type="submit">Filter</button>
             </form>
         </div>    
     </div>
@@ -56,13 +56,31 @@ export async function catalogView(ctx) {
     console.log(`the filter query is : ${ctx.query.filter}`);
     let movies;
     let isSearch = Boolean(ctx.query.search);
-    if (!!ctx.query && !!ctx.query.search) {
-        const queryString = ctx.query.search;
-        console.log(queryString);
+    console.log(ctx.query);
+    console.log(!!ctx.query)
+    console.log(!!ctx.query.search)
+    console.log(Object.keys(ctx.query))
+    if (!!ctx.query && Object.keys(ctx.query).length > 0) {
 
-        const {results: moviesBySearchWord} = await getMovieBySearchWord(queryString);
-        console.log(moviesBySearchWord);
-        movies = moviesBySearchWord;
+        if (!!ctx.query.search && !ctx.query.filter) {
+            const queryString = ctx.query.search;
+            const {results: moviesBySearchWord} = await getMovieBySearchWord(queryString);
+            console.log(moviesBySearchWord);
+            movies = moviesBySearchWord;
+        } else if (!!ctx.query.search && !!ctx.query.filter) {
+            const queryString = ctx.query.search;
+            const queryFilterList = ctx.query.filter.split(",");
+            console.log(queryFilterList);
+
+            const moviesBySearchWordAndFIlter = await getMovieBySearchWordAndFilter(queryString, queryFilterList);
+            movies = moviesBySearchWordAndFIlter;
+        } else if (!ctx.query.search && !!ctx.query.filter) {
+            const queryFilterList = ctx.query.filter.split(",");
+            const {results: MoviesByFilter} = await getMoviesByFilter(queryFilterList);
+            movies = MoviesByFilter;
+        }
+
+
 
     } else {
         const {results: allMovies} = await getAllMovies();
@@ -78,7 +96,25 @@ export async function catalogView(ctx) {
         event.preventDefault();
         const searchedWord = event.target.parentElement.querySelector('input');
 
-        ctx.page.redirect(`/catalog?search=${searchedWord.value}`);
+        const filters = document.getElementById("rating-filter");
+        console.log(filters);
+        const selectedOptions = [];
+
+        for (let i = 0; i < filters.children.length; i++) {
+            if (filters.children[i].selected) {
+                selectedOptions.push(filters.children[i]);
+            };
+        }
+        console.log(selectedOptions);
+
+        if (selectedOptions.length > 0) {
+            ctx.page.redirect(`/catalog?search=${searchedWord.value}&filter=${encodeURIComponent(selectedOptions.map(e => e.value).join(","))}`);
+            console.log(decodeURIComponent(selectedOptions.map(e => e.value).join(",")));
+        } else {
+            ctx.page.redirect(`/catalog?search=${searchedWord.value}`);
+        }
+
+        
 
     }
 
