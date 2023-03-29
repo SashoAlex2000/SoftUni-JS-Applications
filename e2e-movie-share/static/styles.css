@@ -178,6 +178,24 @@ nav {
     border-radius: 2rem;
 }
 
+.rating-filter-wrapper {
+    align-items: center;
+    margin: auto;
+    margin-top: 0.65rem;
+}
+
+.rating-filter {
+    align-items: center;
+    width: 50%;
+    margin: auto;
+}
+
+.rating-filter-form {
+    align-items: center;
+    width: 65%;
+    margin: auto;
+}
+
 
 /* .meta-search-button {
     color: #fff;
