@@ -8,7 +8,7 @@ import { showHome } from './views/home.js';
 import { addSession } from './middleware/session.js';
 import { getUserData } from './util.js';
 import { addUserNav } from './middleware/navRender.js';
-import { navTemplate } from './views/nav.js';
+import { navTemplate, secondNavTemplate } from './views/nav.js';
 import { loginView } from './views/login.js';
 import { onLogout } from './views/logout.js';
 import { registerView } from './views/register.js';
@@ -23,7 +23,8 @@ import { addQuery } from './middleware/parseQuery.js';
 // middlewares added, loading ctx
 page(addRender(document.getElementById('main'), document.querySelector('nav')));
 page(addSession(getUserData));
-page(addUserNav(navTemplate));
+// page(addUserNav(navTemplate));
+page(addUserNav(secondNavTemplate));
 // 20230325 -> loading the middleware, which loads ctx with any querystring params
 page(addQuery());
 
