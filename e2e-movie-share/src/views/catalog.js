@@ -30,15 +30,31 @@ const catalogTemplate = (movies, onSearch, isSearch, options) => html `
         </div>    
     </div>
     <div class="movie-wrapper">
-        <!-- Throws error with a single item -->
-        ${repeat(movies, m => m.objectId, movieCard)}
+        <div class="tags-container">
+            <h4>Hardcoded Categories of Movies</h4>
+            <div class="tags-list">
+                <a href="/">Action</a>
+                <a>Adventure</a>
+                <a>Classic</a>
+                <a>Other</a>
+            </div>
+        </div>
+
+        <!-- Throws error with a single item - it doesn't, the problem was with fetching (result'S')-->
+        <div class="movie-list">
+            ${repeat(movies, m => m.objectId, movieCard)}
+        </div>
     </div>
 `;
 
 const movieCard = (movie) => html `
     <div class="single-movie">
         <h4>${movie.name}</h4>
-        ${movie.imageUrl ? html `<img src=${movie.imageUrl} class="catalog-img">`: nothing}
+        ${movie.imageUrl ? html `
+        <img src=${movie.imageUrl} class="catalog-img">
+        `: html `
+        <img src="../../static/images/default.jpeg" class="catalog-img">
+        `}
         <p>Release date: ${movie.year}<p>
         <p>Description: ${movie.description}<p>
         <a href="/catalog/${movie.objectId}">Details</a>

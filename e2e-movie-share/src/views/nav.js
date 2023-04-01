@@ -33,25 +33,38 @@ export const secondNavTemplate = (hasUser) => html `
             </div>
             <ul class="navbar-menu-2">
                 <li class="navbar-item">
+                    <a href="/catalog" class="navbar-links">
+                        View Movies
+                    </a>
+                </li>
+                ${hasUser ? html `
+                <li class="navbar-item">
+                    <a href="/create" class="navbar-links">
+                        Create
+                    </a>
+                </li>
+                <li class="navbar-item">
                     <a href="/" class="navbar-links">
-                        H0me
+                        Your Profile
                     </a>
                 </li>
                 <li class="navbar-item">
-                    <a href="/test_flex.html" class="navbar-links">
-                        Tech
+                    <a href="/logout" class="navbar-links">
+                        Logout
                     </a>
                 </li>
+                ` : html `
                 <li class="navbar-item">
-                    <a href="./test_page.html" class="navbar-links">
-                        Products
-                    </a>
-                </li>
-                <li class="navbar-btn">
-                    <a href="/" class="button">
+                    <a href="/register" class="navbar-links">
                         Sign Up
                     </a>
                 </li>
+                <li class="navbar-item">
+                    <a href="/login" class="navbar-links">
+                        Sign In
+                    </a>
+                </li>
+                `}
             </ul>
         </div>
 
